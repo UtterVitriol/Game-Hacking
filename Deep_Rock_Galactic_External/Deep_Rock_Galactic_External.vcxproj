@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{ea69bba3-5bdf-436d-91e2-5f3257f28160}</ProjectGuid>
-    <RootNamespace>GettingStarted</RootNamespace>
+    <ProjectGuid>{02aadaae-7430-4a9b-ad42-a1662ea9f90f}</ProjectGuid>
+    <RootNamespace>DeepRockGalacticExternal</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -128,9 +128,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mem.cpp" />
+    <ClCompile Include="proc.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="README.md" />
+    <ClInclude Include="mem.h" />
+    <ClInclude Include="proc.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
