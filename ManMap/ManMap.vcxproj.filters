@@ -15,13 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Injection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="README.md">
-      <Filter>Resource Files</Filter>
-    </None>
+    <ClInclude Include="Injection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
