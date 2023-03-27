@@ -20,4 +20,6 @@ Here I will do the beginning lessons on from Guided Hacking
 ### Videos
 	1 - Find offsets, entity address & pointers (Cheat engine can dissect structures)
 
+[Reversing Recoil](https://guidedhacking.com/threads/reverse-engineering-tutorial-assault-cube-recoil.11970/)
+
 	
