@@ -20,6 +20,11 @@ Here I will do the beginning lessons on from Guided Hacking
 ### Videos
 	1 - Find offsets, entity address & pointers (Cheat engine can dissect structures)
 
-[Reversing Recoil](https://guidedhacking.com/threads/reverse-engineering-tutorial-assault-cube-recoil.11970/)
+[Reversing Recoil](https://guidedhacking.com/threads/reverse-engineering-tutorial-assault-cube-recoil.11970/) - Interesting
 
+[Detour Hooking Function](https://guidedhacking.com/threads/c-detour-hooking-function-tutorial.7930/)
 	
+
+## [Beginners Guide to Reversing](https://guidedhacking.com/threads/ghb2-beginners-guide-to-reverse-engineering.13446/)
+
+### REE
