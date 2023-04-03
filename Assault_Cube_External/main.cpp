@@ -3,8 +3,8 @@
 
 #include "Windows.h"
 
-#include "proc.h"
-#include "mem.h"
+#include "../MemLib/mem.h"
+#include "../ProcLib/proc.h"
 
 
 int main()
@@ -43,33 +43,37 @@ int main()
 
 	DWORD dwExit = 0;
 
+	bool bHealth = false, bAmmo = false, bRecoil = false;
+
+
 
 	while (GetExitCodeProcess(hProcess, &dwExit) && STILL_ACTIVE)
 	{
-		if (GetAsyncKeyState(VK_F1) & 1) {
-			bMoney = !bMoney;
-			if (!bMoney) {
-				mem::PatchEx((BYTE*)goldAddr, (BYTE*)&oldMoney, sizeof(oldMoney), hProcess);
-			}
 
+		if (GetAsyncKeyState(VK_END) & 1) {
+			break;
+		}
+
+		if (GetAsyncKeyState(VK_F1) & 1) {
+			bHealth = !bHealth;
 		}
 
 		if (GetAsyncKeyState(VK_F2) & 1) {
-			mem::ReadEx((BYTE*)zCoordAddr, (BYTE*)&zCoord, sizeof(zCoord), hProcess);
-			mem::ReadEx((BYTE*)zCoordAddr - 4, (BYTE*)&yCoord, sizeof(yCoord), hProcess);
-			mem::ReadEx((BYTE*)zCoordAddr - 8, (BYTE*)&xCoord, sizeof(xCoord), hProcess);
-				
+			bAmmo = !bAmmo;
 		}
 
 		if (GetAsyncKeyState(VK_F3) & 1) {
-			mem::PatchEx((BYTE*)zCoordAddr, (BYTE*)&zCoord, sizeof(zCoord), hProcess);
-			mem::PatchEx((BYTE*)zCoordAddr - 4, (BYTE*)&yCoord, sizeof(yCoord), hProcess);
-			mem::PatchEx((BYTE*)zCoordAddr - 8, (BYTE*)&xCoord, sizeof(xCoord), hProcess);
-		}
+			bRecoil = !bRecoil;
 
-		if (GetAsyncKeyState(VK_NUMPAD0) & 1)
-		{
-			puts("ahahaha");
+			if (bRecoil) {
+				// NOP instructions.
+				mem::Nop((BYTE*)(moduleBase + 0x63786), 10);
+			}
+			else {
+				// Restore instructions.
+				mem::Patch((BYTE*)(moduleBase + 0x63786), (BYTE*)"\x50\x8d\x4c\x24\x1c\x51\x8b\xce\xff\xd2", 10);
+			}
+
 		}
 
 

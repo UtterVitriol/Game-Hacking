@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "proc.h"
 
 /* Get process ID of process

@@ -1,11 +1,8 @@
-// dllmain.cpp : Defines the entry point for the DLL application.
-#include "pch.h"
-
 #include <Windows.h>
 #include <iostream>
 #include <TlHelp32.h>
-#include "mem.h"
-#include "proc.h"
+#include "../MemLib/mem.h"
+#include "../ProcLib/proc.h"
 
 
 struct vec3 {
@@ -70,7 +67,7 @@ DWORD WINAPI HackThread(HMODULE hModule) {
 
 	// Get module base.
 	uintptr_t moduleBase = (uintptr_t)GetModuleHandle(L"ac_client.exe");
-	
+
 
 
 
