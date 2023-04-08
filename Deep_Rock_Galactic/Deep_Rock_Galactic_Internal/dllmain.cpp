@@ -1,11 +1,22 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
-#include "pch.h"
-
 #include <Windows.h>
 #include <iostream>
+#include <cstdio>
 #include <TlHelp32.h>
-#include "mem.h"
-#include "proc.h"
+#include <time.h>
+#include <sstream>
+#include <string>
+
+#include "Display.h"
+#include "Player.h"
+#include "Hack.h"
+
+
+typedef void (*tShoot)(Weapon*);
+
+tShoot Shoot = nullptr; // Modulebase + 1514AA0
+
+uintptr_t moduleBase = (uintptr_t)GetModuleHandle(NULL);
 
 DWORD WINAPI HackThread(HMODULE hModule) {
 	// Create console.
@@ -17,69 +28,37 @@ DWORD WINAPI HackThread(HMODULE hModule) {
 	// Securely open file stream.
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 
-	std::cout << "OG for a fee, stay sippin' fam\n";
+	MyPlayer Player;
+
+	Player.Start();
+
+	while (!GetAsyncKeyState(VK_END) & 1) {
 
 
-	// Get module base.
-	uintptr_t moduleBase = (uintptr_t)GetModuleHandle(L"ac_client.exe");
+		//if (PlayerHealth->BaseHealth == 0)
+		//{
+		//	// At base
+		//	Display.Print(&Display.sLocation, "Base");
+		//	continue;
+		//}
+
+		//Display.Print(&Display.sLocation, "Cave");
 
 
 
-
-	bool bHealth = false, bAmmo = false, bRecoil = false;
-
-	// Hack loop.
-
-	for (;;) {
-		// Key input.
-
-		if (GetAsyncKeyState(VK_END) & 1) {
-			break;
-		}
-
-		if (GetAsyncKeyState(VK_F1) & 1) {
-			bHealth = !bHealth;
-		}
-
-		if (GetAsyncKeyState(VK_F2) & 1) {
-			bAmmo = !bAmmo;
-		}
-
-		if (GetAsyncKeyState(VK_F3) & 1) {
-			bRecoil = !bRecoil;
-
-			if (bRecoil) {
-				// NOP instructions.
-				mem::Nop((BYTE*)(moduleBase + 0x63786), 10);
-			}
-			else {
-				// Restore instructions.
-				mem::Patch((BYTE*)(moduleBase + 0x63786), (BYTE*)"\x50\x8d\x4c\x24\x1c\x51\x8b\xce\xff\xd2", 10);
-			}
-
-		}
+		//if (Display.sGameStatus == "Waiting")
+		//{
+		//	std::stringstream ss;
+		//	ss << Player;
+		//	std::string s = ss.str();
+		//	Display.Print(&Display.sGameStatus, s.c_str());
+		//}
 
 
-		// Continuous write/freeze
-		PlayerEnt* localPlayer = *(PlayerEnt**)(moduleBase + 0x10f4f4);
-
-		if (localPlayer) {
-			if (bHealth) {
-				localPlayer->Health = 1337;
-				localPlayer->Armor = 1337;
-			}
-
-			if (bAmmo) {
-				*localPlayer->CurWeapon->AmmoPtr = 1337;
-				*localPlayer->CurWeapon->ResAmmoPtr = 1337;
-			}
-
-		}
+		Player.UpdateValues();
 
 		Sleep(5);
 	}
-
-
 
 	// Cleanup & Eject.
 	fclose(fp);
