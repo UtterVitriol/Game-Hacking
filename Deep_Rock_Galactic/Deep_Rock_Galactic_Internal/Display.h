@@ -7,14 +7,14 @@ class TrainerDisplay
 {
 public:
 	
-	std::string sGameStatus = "FINE";
-	std::string sLocation = "Base";
-
+	std::string sGameStatus = "ON MISSION";
 	std::string sGoodWeapons = "OFF";
 	std::string sGodWeapons = "OFF";
 	std::string sRapidFire = "OFF";
 	std::string sSteroids = "OFF";
 	std::string sTeleport = "NOT SAVED";
+	std::string sMineralHook = "NOT HOOKED";
+	std::string sObjectiveHook = "NOT HOOKED";
 
 	void SetWindow()
 	{
@@ -34,14 +34,14 @@ public:
 			<< "[NUMPAD2] God Weapons        -> " << sGodWeapons << " <-\n\n"
 			<< "[NUMPAD3] Rapid Fire         -> " << sRapidFire << " <-\n\n"
 			<< "[NUMPAD4] Steroids           -> " << sSteroids << " <-\n\n"
+			<< "[NUMPAD5] Mineral Hook       -> " << sMineralHook << " <-\n\n"
+			<< "[NUMPAD6] Objective Hook       -> " << sObjectiveHook << " <-\n\n"
 			<< "[NUMPAD7] Save Location\n"
 			<< "[NUMPAD8] Teleport Location\n"
 			<< "[END] Exit\n\n"
 			<< "----------------------------------------------------\n"
 			<< "----------------------------------------------------\n\n"
-			<< "Teleport                      -> " << sTeleport << "<-\n\n"
-			<< "Game Status                   -> " << sGameStatus << " <- \n\n"
-			<< "Locatoins                     -> " << sLocation << " <- \n\n"
+			<< "Game Status -> " << sGameStatus << " <- \n\n"
 			<< "----------------------------------------------------\n"
 			<< "----------------------------------------------------\n" <<std::flush;
 	}

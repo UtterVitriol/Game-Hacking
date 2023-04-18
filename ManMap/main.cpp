@@ -28,8 +28,8 @@ const char szProc[] = "Test Console x86.exe";
 
 //We need to set our target process name and Dll path manually for every game and therefore two strings is enougth here
 //Just don't forget that injector, DLL and target process should have same architecture
-const char szDllFile[] = ".\\Deep_Rock_Galactic_Internal.dll";
-const wchar_t szProc[] = L"FSD-Win64-Shipping.exe";
+const char szDllFile[] = "C:\\Users\\uttervitriol\\source\\repos\\Game-Hacking\\x64\\Debug\\Guild_Wars_2.dll";
+const wchar_t szProc[] = L"Gw2-64.exe";
 
 bool IsCorrectTargetArchitecture(HANDLE hProc) // function for catch an error with architecture
 {

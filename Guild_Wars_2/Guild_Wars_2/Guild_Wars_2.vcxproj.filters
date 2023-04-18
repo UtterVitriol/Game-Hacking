@@ -18,36 +18,10 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Hack.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Display.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Hack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <NASM Include="MineralHook.asm">
-      <Filter>Source Files</Filter>
-    </NASM>
-    <NASM Include="HealthHook.asm">
-      <Filter>Source Files</Filter>
-    </NASM>
-    <NASM Include="ObjectiveHook.asm">
-      <Filter>Source Files</Filter>
-    </NASM>
   </ItemGroup>
 </Project>

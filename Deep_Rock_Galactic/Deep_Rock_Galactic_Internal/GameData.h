@@ -8,17 +8,35 @@ typedef struct Vector3 { float x, y, z; } Vec3;
 enum WeaponType
 {
 	minigun = 0x7C0,
+	autocannon = 0x7F4,
 	pistol = 0x744,
 	zipline = 0x788,
-	shield_generator =	0x48461C,
-	supply_drop =		0x282A6E,
+	shotgun = 0x718,
+	grenadelauncher = 0x6F0,
+	platformgun = 0x701,
+	coilgun = 0xB59,
 	piack_axe = 0x6B4,
-	grenade =			0x348F5E,
+
+	sentrygun = 0x488,
+	supply_drop = 0x418,
+	grenade =	0x4CB,
+	//shield_generator =	0x48461C,
 };
 
 
 
 // Created with ReClass.NET 1.2 by KN4CK3R
+
+class GameData
+{
+public:
+	char pad_0000[2736]; //0x0000
+	class PlayerData* pPlayerData; //0x0AB0
+	char pad_0AB8[8]; //0x0AB8
+	class WeaponData* pWeaponData; //0x0AC0
+	char pad_0AC8[568]; //0x0AC8
+}; //Size: 0x0D00
+static_assert(sizeof(GameData) == 0xD00);
 
 class PlayerData
 {
@@ -99,7 +117,8 @@ public:
 	char pad_0428[520]; //0x0428
 	int32_t ammoSubtraction; //0x0630
 	float fireRate; //0x0634
-	char pad_0638[12]; //0x0638
+	char pad_0638[8]; //0x0638
+	float reloadTime; //0x0640
 	int32_t reserveAmmo; //0x0644
 	int32_t ammo; //0x0648
 	char pad_064C[36]; //0x064C
@@ -109,21 +128,31 @@ public:
 	float recoilYMag; //0x068C
 	float recoilX; //0x0690
 	float recoilxMag; //0x0694
-	char pad_0698[64]; //0x0698
+	char pad_0698[56]; //0x0698
+	float zipLineMaxDistance; //0x06D0
+	float zipLineMinDistance; //0x06D4
 	float zipLineBaseAngle; //0x06D8
 	float zipLineMaxAngle; //0x06DC
-	char pad_06E0[120]; //0x06E0
-}; //Size: 0x0758
-static_assert(sizeof(Weapon) == 0x758);
+	char pad_06E0[16]; //0x06E0
+	float miniGunSpinUpTime; //0x06F0
+	char pad_06F4[76]; //0x06F4
+	float coilGunChargeRate; //0x0740
+	char pad_0744[4]; //0x0744
+	float coilGunCharge; //0x0748
+	char pad_074C[4]; //0x074C
+	int32_t CoilGunSubtractionRate; //0x0750
+	char pad_0754[68]; //0x0754
+}; //Size: 0x0798
+static_assert(sizeof(Weapon) == 0x798);
 
 class HasWeaponType
 {
 public:
 	char pad_0000[88]; //0x0000
-	int32_t weaponType; //0x0058
-	char pad_005C[188]; //0x005C
-}; //Size: 0x0118
-static_assert(sizeof(HasWeaponType) == 0x118);
+	int16_t weaponType; //0x0058
+	char pad_005A[196]; //0x005A
+}; //Size: 0x011E
+static_assert(sizeof(HasWeaponType) == 0x11E);
 
 class Body
 {
@@ -140,9 +169,9 @@ class Movement
 public:
 	char pad_0000[176]; //0x0000
 	class Position* pPosition; //0x00B0
-	char pad_00B8[16]; //0x00B8
-	Vec3 velocity; //0x00C8
-	char pad_00D4[124]; //0x00D4
+	char pad_00B8[12]; //0x00B8
+	Vec3 velocity; //0x00C4
+	char pad_00D0[128]; //0x00D0
 	float gravit; //0x0150
 	float stepHeight; //0x0154
 	float jumpHeight; //0x0158
@@ -186,9 +215,11 @@ public:
 	float ricochetChance; //0x023C
 	char pad_0240[4]; //0x0240
 	float ricochetMaxRange; //0x0244
-	char pad_0248[152]; //0x0248
-}; //Size: 0x02E0
-static_assert(sizeof(Stats) == 0x2E0);
+	char pad_0248[40]; //0x0248
+	float N000049F9; //0x0270
+	char pad_0274[524]; //0x0274
+}; //Size: 0x0480
+static_assert(sizeof(Stats) == 0x480);
 
 class WeaponDamage
 {
@@ -200,31 +231,10 @@ public:
 	float stunChance; //0x0150
 	float stunDuraton; //0x0154
 	float fearFactor; //0x0158
-	char pad_015C[108]; //0x015C
+	char pad_015C[72]; //0x015C
+	float areaDamage; //0x01A4
+	char pad_01A8[20]; //0x01A8
+	float areaRange; //0x01BC
+	char pad_01C0[8]; //0x01C0
 }; //Size: 0x01C8
 static_assert(sizeof(WeaponDamage) == 0x1C8);
-
-class GameData
-{
-public:
-	char pad_0000[2736]; //0x0000
-	class PlayerData* pPlayerData; //0x0AB0
-	char pad_0AB8[8]; //0x0AB8
-	class WeaponData* pWeaponData; //0x0AC0
-	char pad_0AC8[1472]; //0x0AC8
-}; //Size: 0x1088
-static_assert(sizeof(GameData) == 0x1088);
-
-class N00000B1A
-{
-public:
-	char pad_0000[136]; //0x0000
-}; //Size: 0x0088
-static_assert(sizeof(N00000B1A) == 0x88);
-
-class N00000B33
-{
-public:
-	char pad_0000[136]; //0x0000
-}; //Size: 0x0088
-static_assert(sizeof(N00000B33) == 0x88);

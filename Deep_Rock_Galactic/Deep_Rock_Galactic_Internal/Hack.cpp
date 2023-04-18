@@ -33,6 +33,39 @@ namespace Hack {
 		VirtualProtect(dst, size, oldprotect, &oldprotect);
 	}
 
+	bool Detour(void* toHook, const void* myFunc, const uint64_t length)
+	{
+		if (toHook && myFunc)
+		{
+			// Check min size
+			if (length < INST_CALL_SIZE)
+			{
+
+				return false;
+			}
+
+			// Change permissions
+			DWORD curProtection;
+			VirtualProtect(toHook, length, PAGE_EXECUTE_READWRITE, &curProtection);
+
+			// NOP instructions so we can replace with jmp or call?
+			if (length > INST_CALL_SIZE)
+				memset(toHook, INST_NOP, length);
+
+			*(uint64_t*)toHook = INST_CALL;
+			*(uint64_t*)((uint64_t)toHook + 8) = (uint64_t)myFunc;
+
+			DWORD temp;
+			VirtualProtect(toHook, length, curProtection, &temp);
+
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	// Find Dynamic Memory Allocation Address (multi-level pointer).
 	uintptr_t FindDMAAddy(uintptr_t ptr, std::vector<unsigned int> offsets)
 	{
